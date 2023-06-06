@@ -9,37 +9,87 @@
     <section id="hero" class="hero d-flex align-items-center">
         <div class="container">
       <div class="row justify-content-center">
-        <div class="col-lg-5 d-flex flex-column justify-content-center">
-          <h1>Helping you get the job of your dreams</h1>
-          <h4>We are team of talented coaches ready to help you get a job</h4>
+        <div class="col-lg-6 d-flex flex-column justify-content-center order-2 order-lg-1">
+          <h1 class="text-uppercase">Helping you get the job of your dreams</h1>
+          <h5>We are team of talented coaches ready to help you get a job</h5>
             <div class="text-center text-lg-start">
               <a href="/" class="btn btn-main btn-lg mt-3">Get Started
                 <i class="bi bi-arrow-right"></i>
               </a>
             </div>
         </div>
-        <div class="col-lg-7 hero-img">
+        <div class="col-lg-6 hero-img order-1 order-lg-2">
           <img src="{% static 'images/hero.svg' %}" class="img-fluid" alt="employment empower hero image">
         </div>
       </div>
     </div>
 
     </section>
+
+    <!-- ======= Services Section ======= -->
+    <section id="services" class="services section-bg">
+      <div class="container" data-aos="fade-up">
+
+        <div class="col-lg-12 text-center text-uppercase">
+                <h6>Services</h6>
+                <h2 class="text-main">A glimpse of what we offer</h2>
+            </div>
+
+        <div class="row justify-content-center mt-2">
+          <div class="col-md-5 d-flex align-items-stretch mt-2" data-aos="zoom-in" data-aos-delay="100">
+            <div class="icon-box">
+              <div class="w-25 mb-3" style="height: 5px; background-color: #eaba82"></div>
+              <h5>On-Site and Online Trainings</h5>
+              <p>Voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi</p>
+            </div>
+          </div>
+
+          <div class="col-md-5 d-flex align-items-stretch mt-2" data-aos="zoom-in" data-aos-delay="200">
+            <div class="icon-box">
+              <div class="w-25 mb-3" style="height: 5px; background-color: #eaba82"></div>
+              <h5>Video Tutorials</h5>
+              <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore</p>
+            </div>
+          </div>
+
+          <div class="col-md-5 d-flex align-items-stretch mt-2" data-aos="zoom-in" data-aos-delay="300">
+            <div class="icon-box">
+              <div class="w-25 mb-3" style="height: 5px; background-color: #eaba82"></div>
+              <h5>Webinars</h5>
+              <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia</p>
+            </div>
+          </div>
+
+          <div class="col-md-5 d-flex align-items-stretch mt-2" data-aos="zoom-in" data-aos-delay="400">
+            <div class="icon-box">
+              <div class="w-25 mb-3" style="height: 5px; background-color: #eaba82"></div>
+              <h5>Blog Articles</h5>
+              <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis</p>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section><!-- End Services Section -->
+
        <!-- ======= Pricing Section ======= -->
-    <section id="pricing" class="pricing">
+    <section id="pricing" class="pricing bg-main-light mt-5">
 
       <div class="container" data-aos="fade-up">
 
-        <header class="section-header">
-          <h2>Pricing</h2>
-          <p>Check our Pricing</p>
-        </header>
+        <div class="row justify-content-center">
+            <div class="col-lg-12 text-center text-uppercase">
+                <h6>Membership</h6>
+                <h2 class="text-main">Check out our Membership Plans</h2>
+            </div>
+        </div>
 
-        <div class="row gy-4" data-aos="fade-left">
+        <div class="row gy-4 mt-4" data-aos="fade-left">
 
           <div class="col-lg-3 col-md-6" data-aos="zoom-in" data-aos-delay="100">
             <div class="box">
-              <h3 style="color: #07d5c0;">Free Plan</h3>
+              <h3 style="color: #0e76a8;">Free Plan</h3>
               <div class="price"><sup>$</sup>0<span> / mo</span></div>
               <img src="assets/img/pricing-free.png" class="img-fluid" alt="">
               <ul>
@@ -49,14 +99,14 @@
                 <li class="na">Pharetra massa</li>
                 <li class="na">Massa ultricies mi</li>
               </ul>
-              <a href="#" class="btn-buy">Buy Now</a>
+              <a href="#" class="btn btn-main w-50">Sign Up</a>
             </div>
           </div>
 
           <div class="col-lg-3 col-md-6" data-aos="zoom-in" data-aos-delay="200">
             <div class="box">
               <span class="featured">Featured</span>
-              <h3 style="color: #65c600;">Starter Plan</h3>
+              <h3 style="color: #0b3b53;">Starter Plan</h3>
               <div class="price"><sup>$</sup>19<span> / mo</span></div>
               <img src="assets/img/pricing-starter.png" class="img-fluid" alt="">
               <ul>
@@ -66,13 +116,13 @@
                 <li>Pharetra massa</li>
                 <li class="na">Massa ultricies mi</li>
               </ul>
-              <a href="#" class="btn-buy">Buy Now</a>
+              <a href="#" class="btn btn-main w-50">Sign Up</a>
             </div>
           </div>
 
           <div class="col-lg-3 col-md-6" data-aos="zoom-in" data-aos-delay="300">
             <div class="box">
-              <h3 style="color: #ff901c;">Business Plan</h3>
+              <h3 style="color: #eaba82;">Business Plan</h3>
               <div class="price"><sup>$</sup>29<span> / mo</span></div>
               <img src="assets/img/pricing-business.png" class="img-fluid" alt="">
               <ul>
@@ -82,13 +132,13 @@
                 <li>Pharetra massa</li>
                 <li>Massa ultricies mi</li>
               </ul>
-              <a href="#" class="btn-buy">Buy Now</a>
+              <a href="#" class="btn btn-main w-50">Sign Up</a>
             </div>
           </div>
 
           <div class="col-lg-3 col-md-6" data-aos="zoom-in" data-aos-delay="400">
             <div class="box">
-              <h3 style="color: #ff0071;">Ultimate Plan</h3>
+              <h3 style="color: #de7c7c;">Ultimate Plan</h3>
               <div class="price"><sup>$</sup>49<span> / mo</span></div>
               <img src="assets/img/pricing-ultimate.png" class="img-fluid" alt="">
               <ul>
@@ -98,7 +148,7 @@
                 <li>Pharetra massa</li>
                 <li>Massa ultricies mi</li>
               </ul>
-              <a href="#" class="btn-buy">Buy Now</a>
+              <a href="#" class="btn btn-main w-50">Sign Up</a>
             </div>
           </div>
 
