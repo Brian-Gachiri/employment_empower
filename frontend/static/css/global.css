@@ -15,7 +15,6 @@
     }
 
 body {
-    background-color: var(--light-background);
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif !important;
     font-size:1.2em !important;    
 }
@@ -207,6 +206,9 @@ a:hover {
 /*--------------------------------------------------------------
 # Pricing
 --------------------------------------------------------------*/
+.pricing {
+  padding-bottom: 3em !important;
+}
 .pricing .box {
   padding: 40px 20px;
   background: #fff;
@@ -307,7 +309,7 @@ a:hover {
 # Sections
 --------------------------------------------------------------*/
 section {
-  padding: 60px 0;
+  padding-top: 60px;
   overflow: hidden;
 }
 
@@ -380,6 +382,7 @@ section {
 .footer {
   background: var(--light-background);
   padding: 0 0 30px 0;
+  margin-top: 30px;
   font-size: 14px;
 }
 
@@ -422,7 +425,7 @@ section {
   font-size: 16px;
   padding: 0 30px;
   margin: 3px;
-  background: #4154f1;
+  background: var(--main);
   color: #fff;
   transition: 0.3s;
   border-radius: 4px;
@@ -605,4 +608,82 @@ section {
 
 .services .icon-box:hover h4 a {
   color: #47b2e4;
+}
+
+/*--------------------------------------------------------------
+# Contact
+--------------------------------------------------------------*/
+.contact .info-box {
+  color: var(--main-dark);
+  background: var(--light-background);
+  padding: 30px;
+}
+
+.contact .info-box i {
+  font-size: 38px;
+  line-height: 0;
+  color: var(--main);
+}
+
+.contact .info-box h3 {
+  font-size: 20px;
+  color: var(--main);
+  font-weight: 700;
+  margin: 20px 0 10px 0;
+}
+
+.contact .info-box p {
+  padding: 0;
+  line-height: 24px;
+  font-size: 14px;
+  margin-bottom: 0;
+}
+.contact .php-email-form {
+  background: var(--light-background);
+  padding: 30px;
+  height: 100%;
+}
+
+/*--------------------------------------------------------------
+# F.A.Q
+--------------------------------------------------------------*/
+
+.faq .accordion-collapse {
+  border: 0;
+}
+
+.faq .accordion-item{
+    background-color: var(--light-background);
+  border-radius: 3px;
+  padding: 5px 5px 5px 20px;
+  border: none !important;
+  margin: 5px;
+}
+.faq .accordion-header button{
+    background-color: var(--light-background);
+}
+
+.faq .accordion-button {
+  padding: 15px 15px 20px 0;
+  font-weight: 600;
+  border: 0;
+  font-size: 18px;
+  color: var(--main);
+  text-align: left;
+}
+
+.faq .accordion-button:focus {
+  box-shadow: none;
+}
+
+.faq .accordion-button:not(.collapsed) {
+  background: none;
+  color: var(--main);
+  border-bottom: 0;
+}
+
+.faq .accordion-body {
+  padding: 0 0 25px 0;
+  border: 0;
+  color: var(--main-dark);
 }

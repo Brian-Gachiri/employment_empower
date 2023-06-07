@@ -8,22 +8,22 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="/">Home</a>
+          <a class="nav-link {% if request.path == '/' %}active {% endif %}" aria-current="page" href="/">Home</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">About</a>
+          <a class="nav-link {% if request.path == '/about' %}active {% endif %}" href="{% url 'about' %}">About</a>
         </li>
           <li class="nav-item">
-          <a class="nav-link" href="#">Our Team</a>
+          <a class="nav-link {% if request.path == '/team' %}active {% endif %}" href="{% url 'team' %}">Our Team</a>
         </li>
           <li class="nav-item">
-          <a class="nav-link" href="#">FAQs</a>
+          <a class="nav-link {% if request.path == '/faq' %}active {% endif %}" href="{% url 'faq' %}">FAQs</a>
         </li>
           <li class="nav-item">
-          <a class="nav-link" href="#">Contact</a>
+          <a class="nav-link {% if request.path == '/contact' %}active {% endif %}" href="{% url 'contact' %}">Contact</a>
         </li>
           <li class="nav-item">
-          <a class="btn btn-main" href="#">Get Started</a>
+          <a class="btn btn-main" href="#memberships">Get Started</a>
         </li>
 
       </ul>
