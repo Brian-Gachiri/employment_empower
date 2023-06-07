@@ -6,85 +6,22 @@
 {% endblock %}
 
 {% block content %}
-    <section id="hero" class="hero d-flex align-items-center">
-        <div class="container-fluid">
-      <div class="row justify-content-center no-gutters">
-        <div class="col-lg-5 d-flex flex-column justify-content-center order-2 order-lg-1">
-          <h1 class="text-uppercase">Helping you get the job of your dreams</h1>
-          <h5>We are team of talented coaches ready to help you get a job</h5>
-            <div class="text-center text-lg-start">
-              <a href="#memberships" class="btn btn-main btn-lg mt-3">Get Started
-                <i class="bi bi-arrow-right"></i>
-              </a>
+    <section id="hero" class="d-flex align-items-center">
+        <div class="container">
+          <div class="row justify-content-center">
+            <div class="col-lg-6 text-center mt-5 text-uppercase">
+              <small class="text-main">Memberships</small>
+              <h1>Different packages for you</h1>
             </div>
+          </div>
         </div>
-        <div class="col-lg-5 hero-img order-1 order-lg-2">
-          <img src="{% static 'images/hero.svg' %}" class="img-fluid" alt="employment empower hero image">
-        </div>
-      </div>
-    </div>
 
     </section>
 
-    <!-- ======= Services Section ======= -->
-    <section id="services" class="services section-bg">
-      <div class="container" data-aos="fade-up">
-
-        <div class="col-lg-12 text-center text-uppercase">
-                <h6>Services</h6>
-                <h2 class="text-main">A glimpse of what we offer</h2>
-            </div>
-
-        <div class="row justify-content-center mt-2">
-          <div class="col-md-5 d-flex align-items-stretch mt-2" data-aos="zoom-in" data-aos-delay="100">
-            <div class="icon-box text-center">
-              <i class="bi bi-vinyl-fill"></i>
-              <h5>On-Site and Online Trainings</h5>
-              <p>Voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi</p>
-            </div>
-          </div>
-
-          <div class="col-md-5 d-flex align-items-stretch mt-2" data-aos="zoom-in" data-aos-delay="200">
-            <div class="icon-box text-center">
-              <i class="bi bi-camera-video-fill"></i>
-              <h5>Video Tutorials</h5>
-              <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore</p>
-            </div>
-          </div>
-
-          <div class="col-md-5 d-flex align-items-stretch mt-2" data-aos="zoom-in" data-aos-delay="300">
-            <div class="icon-box text-center">
-              <i class="bi bi-person-video2"></i>
-              <h5>Webinars</h5>
-              <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia</p>
-            </div>
-          </div>
-
-          <div class="col-md-5 d-flex align-items-stretch mt-2" data-aos="zoom-in" data-aos-delay="400">
-            <div class="icon-box text-center">
-              <i class="bi bi-file-earmark-richtext-fill"></i>
-              <h5>Blog Articles</h5>
-              <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis</p>
-            </div>
-          </div>
-
-        </div>
-
-      </div>
-    </section><!-- End Services Section -->
-
-       <!-- ======= Pricing Section ======= -->
-    <section id="pricing" class="pricing bg-main-light mt-5">
+      <!-- ======= Pricing Section ======= -->
+    <section id="pricing" class="pricing">
 
       <div class="container" id="memberships" data-aos="fade-up">
-
-        <div class="row justify-content-center">
-            <div class="col-lg-12 text-center text-uppercase">
-                <h6>Membership</h6>
-                <h2 class="text-main">Check out our Membership Plans</h2>
-            </div>
-        </div>
-
         <div class="row gy-4 mt-4" data-aos="fade-left">
 
           <div class="col-lg-3 col-md-6" data-aos="zoom-in" data-aos-delay="100">
@@ -157,6 +94,19 @@
       </div>
 
     </section><!-- End Pricing Section -->
+
+
+        <section id="get-started" class="bg-main-light py-5 mt-5">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-6 text-center">
+                <h5>Sign up today and fast-track your way to a dream career.</h5>
+                <a href="/#memberships" class="btn btn-main btn-lg">Get Started</a>
+            </div>
+        </div>
+    </div>
+    </section>
+
 
 {% endblock %}
 

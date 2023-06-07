@@ -36,22 +36,23 @@
           <div class="col-lg-2 col-6 footer-links">
             <h4>Useful Links</h4>
             <ul>
-              <li><i class="bi bi-chevron-right"></i> <a href="#">Home</a></li>
-              <li><i class="bi bi-chevron-right"></i> <a href="#">Memberships</a></li>
-              <li><i class="bi bi-chevron-right"></i> <a href="#">FAQs</a></li>
-              <li><i class="bi bi-chevron-right"></i> <a href="#">Terms of service</a></li>
-              <li><i class="bi bi-chevron-right"></i> <a href="#">Privacy policy</a></li>
+              <li><i class="bi bi-chevron-right"></i> <a href="/">Home</a></li>
+              <li><i class="bi bi-chevron-right"></i> <a href="{% url 'memberships' %}">Memberships</a></li>
+              <li><i class="bi bi-chevron-right"></i> <a href="{% url 'faq' %}">FAQs</a></li>
+              <li><i class="bi bi-chevron-right"></i> <a href="{% url 'contact' %}">Contact</a></li>
+{#              <li><i class="bi bi-chevron-right"></i> <a href="/">Terms of service</a></li>#}
+{#              <li><i class="bi bi-chevron-right"></i> <a href="/">Privacy policy</a></li>#}
             </ul>
           </div>
 
           <div class="col-lg-2 col-6 footer-links">
             <h4>Our Services</h4>
             <ul>
-              <li><i class="bi bi-chevron-right"></i> <a href="#">Webinars</a></li>
-              <li><i class="bi bi-chevron-right"></i> <a href="#">Private Online Sessions</a></li>
-              <li><i class="bi bi-chevron-right"></i> <a href="#">In-house Trainings</a></li>
-              <li><i class="bi bi-chevron-right"></i> <a href="#">Video Tutorials</a></li>
-              <li><i class="bi bi-chevron-right"></i> <a href="#">Blog Articles</a></li>
+              <li><i class="bi bi-chevron-right"></i> <a href="{% url 'memberships' %}">Webinars</a></li>
+              <li><i class="bi bi-chevron-right"></i> <a href="{% url 'memberships' %}">Private Online Sessions</a></li>
+              <li><i class="bi bi-chevron-right"></i> <a href="{% url 'memberships' %}">In-house Trainings</a></li>
+              <li><i class="bi bi-chevron-right"></i> <a href="{% url 'memberships' %}">Video Tutorials</a></li>
+              <li><i class="bi bi-chevron-right"></i> <a href="{% url 'memberships' %}">Blog Articles</a></li>
             </ul>
           </div>
 
@@ -73,7 +74,7 @@
 
     <div class="container">
       <div class="copyright">
-        &copy; Copyright <strong><span>Employment Empower</span></strong>. All Rights Reserved
+        &copy; Copyright {% now "Y" %} <strong><span>Employment Empower</span></strong>. All Rights Reserved
       </div>
     </div>
   </footer>

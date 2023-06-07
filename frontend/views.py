@@ -15,8 +15,12 @@ def faq(request):
 
 def about(request):
 
-    return render(request, 'faq.html', {})
+    return render(request, 'about.html', {})
 
 def team(request):
 
-    return render(request, 'faq.html', {})
+    return render(request, 'team.html', {})
+
+def memberships(request):
+
+    return render(request, 'memberships.html', {})
