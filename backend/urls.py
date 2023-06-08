@@ -18,5 +18,11 @@ from django.urls import path
 from .views import *
 
 urlpatterns = [
-
+    path('dashboard', dashboard, name='dashboard'),
+    path('users', users, name='users'),
+    path('memberships', memberships, name='membership_list'),
+    path('job-seekers', job_seekers, name='job_seekers'),
+    path('content', content, name='content'),
+    path('private-sessions', meetings, name='meetings'),
+    path('feedback-and-queries', feedback, name='feedback'),
 ]

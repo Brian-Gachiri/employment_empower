@@ -1,0 +1,81 @@
+{% extends 'layouts/base.html' %}
+{% load static %}
+
+{% block content %}
+
+
+    <div class="pagetitle">
+      <h1>Staff</h1>
+      <nav>
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="{% url 'dashboard' %}">Dashboard</a></li>
+          <li class="breadcrumb-item active">Users</li>
+        </ol>
+      </nav>
+    </div><!-- End Page Title -->
+
+    <section>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 d-flex flex-column align-items-end mt-4 mb-3">
+                <a href="/" class="btn btn-main"><i class="bi bi-plus"></i> New User</a>
+            </div>
+            <div class="col-lg-12">
+                <div class="card">
+{#                    <div class="card-header">#}
+{#                         <p>Total (3)</p>#}
+{#                    </div>#}
+                    <div class="card-body">
+                        <table class="table table-bordered table-striped">
+                          <thead>
+                            <tr>
+                              <th>#</th>
+                              <th>First</th>
+                              <th>Last</th>
+                              <th>Email</th>
+                              <th>Actions</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr>
+                              <th  >1</th>
+                              <td>Mark</td>
+                              <td>Otto</td>
+                              <td>otto@gmail.com</td>
+                                <td>
+                                    <a href="/" class="btn btn-main-light btn-sm"><i class="bi bi-pencil-square"></i></a>
+                                    <a href="/" class="btn btn-danger btn-sm"><i class="bi bi-trash-fill"></i></a>
+                                </td>
+                            </tr>
+                            <tr>
+                              <th  >2</th>
+                              <td>Jacob</td>
+                              <td>Thornton</td>
+                              <td>jake@gmail.com</td>
+                                <td>
+                                    <a href="/" class="btn btn-main-light btn-sm"><i class="bi bi-pencil-square"></i></a>
+                                    <a href="/" class="btn btn-danger btn-sm"><i class="bi bi-trash-fill"></i></a>
+                                </td>
+                            </tr>
+                            <tr>
+                              <th  >3</th>
+                              <td >Larry</td>
+                              <td >The Bird</td>
+                              <td>bird@gmail.com</td>
+                                <td>
+                                    <a href="/" class="btn btn-main-light btn-sm"><i class="bi bi-pencil-square"></i></a>
+                                    <a href="/" class="btn btn-danger btn-sm"><i class="bi bi-trash-fill"></i></a>
+                                </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </section>
+
+
+
+{% endblock %}
