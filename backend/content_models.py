@@ -54,7 +54,7 @@ class PrivateSession(models.Model):
     meeting_url = models.URLField()
     status = models.IntegerField(choices=SESSION_STATUS, default=PENDING)
     instructor = models.ForeignKey(User, related_name="Instructor", on_delete=models.SET_NULL, null=True, blank=True)
-    client = models.ForeignKey(Client, on_delete=models.CASCADE)
+    client = models.ForeignKey(Client, related_name="Job seeker", on_delete=models.CASCADE)
     schedule_time = models.DateTimeField(null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)

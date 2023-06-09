@@ -439,7 +439,7 @@
   scrollbar-width: thin;
   scrollbar-color: #aab7cf transparent;
   /*box-shadow: 0px 0px 20px rgba(1, 41, 112, 0.1);*/
-  /*background-color: var(--light-background);*/
+  background-color: rgba(255, 255, 255, 0.94);
 }
 @media (max-width: 1199px) {
   .sidebar {

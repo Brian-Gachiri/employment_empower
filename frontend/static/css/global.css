@@ -4,10 +4,12 @@
     --tertiary: #519fcf;
     --accent: #eaba82;
     --accent-dark: #b6753d;
+    --accent-light: #ffefdb;
     --light-background: #f6fafd;
     --background: #e4f6fd;
     --red: #de7c7c;
     --red-dark: #d35a5a;
+    --red-light: #ffd3d3;
     --grey-text:#525c60;
     scroll-behavior: smooth;
 }
@@ -77,15 +79,47 @@ a:hover {
 .text-main{
   color: var(--main) !important;
 }
+.text-main-dark{
+  color: var(--main-dark) !important;
+}
 .text-accent{
   color: var(--accent) !important;
 }
+.text-accent-dark{
+  color: var(--accent-dark) !important;
+}
+.text-danger{
+    color: var(--red);
+}
+.text-danger-dark{
+    color: var(--red-dark);
+}
+.text-main-light{
+    color: #566f81 !important;
+}
 
-.bg-main-light{
+.bg-main-lighter{
   background-color: #f6fafd !important;
 }
 
-
+.bg-main-light{
+    background-color: var(--background);
+}
+.bg-accent{
+    background-color: var(--accent);
+}
+.bg-accent-light{
+    background-color: var(--accent-light);
+}
+.bg-danger{
+    background-color: var(--red) !important;
+}
+.bg-danger-dark{
+    background-color: var(--red-dark) !important;
+}
+.bg-danger-light{
+    background-color: var(--red-light) !important;
+}
 /*--------------------------------------------------------------
 # F.A.Q
 --------------------------------------------------------------*/

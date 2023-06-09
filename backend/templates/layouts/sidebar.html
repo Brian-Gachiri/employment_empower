@@ -13,42 +13,56 @@
           <i class="bi bi-people"></i>
           <span>Staff</span>
         </a>
-      </li><!-- End Dashboard Nav -->
+      </li>
 
                  <li class="nav-item">
         <a class="nav-link {% if 'membership' in request.path %} active {% endif %}" href="{% url 'membership_list' %}">
           <i class="bi bi-bookmarks"></i>
           <span>Memberships</span>
         </a>
-      </li><!-- End Dashboard Nav -->
+      </li>
 
                  <li class="nav-item">
         <a class="nav-link {% if 'job-seekers' in request.path %} active {% endif %}" href="{% url 'job_seekers' %}">
           <i class="bi bi-search"></i>
           <span>Job Seekers</span>
         </a>
-      </li><!-- End Dashboard Nav -->
+      </li>
 
                  <li class="nav-item">
         <a class="nav-link {% if 'content' in request.path %} active {% endif %}" href="{% url 'content' %}">
           <i class="bi bi-body-text"></i>
           <span>Content</span>
         </a>
-      </li><!-- End Dashboard Nav -->
+      </li>
 
                  <li class="nav-item">
         <a class="nav-link {% if 'private-sessions' in request.path %} active {% endif %}" href="{% url 'meetings' %}">
           <i class="bi bi-person-badge"></i>
           <span>Private Sessions</span>
         </a>
-      </li><!-- End Dashboard Nav -->
+      </li>
+
+    <li class="nav-item">
+        <a class="nav-link {% if 'coupons' in request.path %} active {% endif %}" href="{% url 'coupons' %}">
+          <i class="bi bi-tags"></i>
+          <span>Coupons</span>
+        </a>
+      </li>
+
+    <li class="nav-item">
+        <a class="nav-link {% if 'orders' in request.path %} active {% endif %}" href="{% url 'orders' %}">
+          <i class="bi bi-card-checklist"></i>
+          <span>Orders</span>
+        </a>
+      </li>
 
     <li class="nav-item">
         <a class="nav-link {% if 'feedback-and-queries' in request.path %} active {% endif %}" href="{% url 'feedback' %}">
           <i class="bi bi-chat-square-dots"></i>
           <span>Feedback & Queries</span>
         </a>
-      </li><!-- End Dashboard Nav -->
+      </li>
 
 
 

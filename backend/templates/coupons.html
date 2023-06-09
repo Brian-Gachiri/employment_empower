@@ -5,11 +5,11 @@
 
 
     <div class="pagetitle">
-      <h1>Private Sessions</h1>
+      <h1>Coupons</h1>
       <nav>
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href="{% url 'dashboard' %}">Dashboard</a></li>
-          <li class="breadcrumb-item active">Private Sessions</li>
+          <li class="breadcrumb-item active">Coupons</li>
         </ol>
       </nav>
     </div><!-- End Page Title -->
@@ -18,31 +18,35 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-12 d-flex flex-column align-items-end mt-4 mb-3">
-                <a href="/" class="btn btn-main"><i class="bi bi-plus"></i> New Private Session</a>
+                <a href="/" class="btn btn-main"><i class="bi bi-plus"></i> New Coupon</a>
             </div>
             <div class="col-lg-12">
                 <div class="card">
+{#                    <div class="card-header">#}
+{#                         <p>Total (3)</p>#}
+{#                    </div>#}
                     <div class="card-body">
                         <table class="table table-bordered table-striped">
                           <thead>
                             <tr>
                               <th>#</th>
-                              <th>Job Seeker</th>
-                              <th>Instructor</th>
-                              <th>Status</th>
-                              <th>Scheduled For</th>
+                              <th>Code</th>
+                              <th>Discount</th>
+                              <th>Expires on</th>
+                              <th>Total Uses</th>
                               <th>Actions</th>
                             </tr>
                           </thead>
                           <tbody>
                             <tr>
                               <th>1</th>
-                              <td>James Doe</td>
-                              <td>Peter Doe</td>
-                              <td><span class="badge text-bg-danger py-auto">Cancelled</span></td>
-                              <td>13th February</td>
-                                <td class="text-center">
-                                    <a href="/" class="btn btn-main-light btn-sm"><i class="bi bi-box-arrow-up-right"></i></a>
+                              <td>EMPLOYMENT2023</td>
+                              <td>5%</td>
+                              <td>23rd July</td>
+                              <td>4/10</td>
+                                <td>
+                                    <a href="/" class="btn btn-main-light btn-sm"><i class="bi bi-pencil-square"></i></a>
+                                    <a href="/" class="btn btn-danger btn-sm"><i class="bi bi-trash-fill"></i></a>
                                 </td>
                             </tr>
                           </tbody>
@@ -53,6 +57,7 @@
         </div>
     </div>
     </section>
+
 
 
 {% endblock %}

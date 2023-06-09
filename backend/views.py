@@ -13,6 +13,9 @@ def memberships(request):
 def job_seekers(request):
     return render(request, 'job_seekers.html', {})
 
+def job_seeker_detail(request):
+    return render(request, 'seeker_details.html', {})
+
 def content(request):
     return render(request, 'content.html', {})
 
@@ -21,3 +24,9 @@ def meetings(request):
 
 def feedback(request):
     return render(request, 'feedback.html', {})
+
+def coupons(request):
+    return render(request, 'coupons.html', {})
+
+def orders(request):
+    return render(request, 'orders.html', {})

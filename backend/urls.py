@@ -22,7 +22,10 @@ urlpatterns = [
     path('users', users, name='users'),
     path('memberships', memberships, name='membership_list'),
     path('job-seekers', job_seekers, name='job_seekers'),
+    path('job-seekers/details', job_seeker_detail, name='seeker_details'),
     path('content', content, name='content'),
     path('private-sessions', meetings, name='meetings'),
     path('feedback-and-queries', feedback, name='feedback'),
+    path('orders', orders, name='orders'),
+    path('coupons', coupons, name='coupons'),
 ]
