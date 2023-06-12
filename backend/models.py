@@ -16,7 +16,7 @@ class Client(User):
 class Membership(models.Model):
 
     name = models.CharField(max_length=250)
-    description = models.TextField()
+    description = models.JSONField(null=False, blank=False)
     price = models.FloatField()
     tier = models.CharField(max_length=50)
     created_at = models.DateTimeField(auto_now_add=True)

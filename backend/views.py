@@ -2,11 +2,15 @@ from django.core.paginator import Paginator
 from django.shortcuts import render
 
 # Create your views here.
-from backend.models import Query
+from backend.models import *
 
 
 def dashboard(request):
-    return render(request, 'dashboard.html', {})
+    plans = Membership.objects.all()
+    data = {
+        'plans': plans
+    }
+    return render(request, 'dashboard.html', data)
 
 def users(request):
     return render(request, 'users.html', {})
@@ -27,7 +31,7 @@ def meetings(request):
     return render(request, 'meetings.html', {})
 
 def feedback(request):
-    queries = Query.objects.all()
+    queries = Query.objects.all().order_by('-id')
     paginator = Paginator(queries, 10)
     page_number = request.GET.get("page")
     page_obj = paginator.get_page(page_number)

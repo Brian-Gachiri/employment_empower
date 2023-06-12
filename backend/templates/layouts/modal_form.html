@@ -1,0 +1,20 @@
+<div class="modal fade" id="modalForm" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content">
+      <div class="modal-header bg-main-lighter">
+        <h1 class="modal-title fs-5 text-main" id="exampleModalLabel">{{ form_title }}</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+          <form id="modal_form" action="{{ action }}">
+              {% csrf_token %}
+              {% include body %}
+              <div class="d-flex flex-row justify-content-end mt-2">
+                  <button type="button" class="btn btn-main-light mx-1" data-bs-dismiss="modal" aria-label="Close">Cancel</button>
+                  <button class="btn btn-main mx-1" type="submit">{{ submit_button }}</button>
+              </div>
+          </form>
+      </div>
+    </div>
+  </div>
+</div>

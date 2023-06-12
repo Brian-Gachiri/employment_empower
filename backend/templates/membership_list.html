@@ -1,5 +1,6 @@
 {% extends 'layouts/base.html' %}
 {% load static %}
+{% load custom_tags %}
 
 {% block content %}
 
@@ -18,7 +19,7 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-12 d-flex flex-column align-items-end mt-4 mb-3">
-                <a href="/" class="btn btn-main"><i class="bi bi-plus"></i> New Membership</a>
+                <button class="btn btn-main" type="button" data-bs-toggle="modal" data-bs-target="#modalForm"><i class="bi bi-plus"></i> New Membership</button>
             </div>
             <div class="col-lg-12">
                 <div class="card">
@@ -55,6 +56,63 @@
     </div>
     </section>
 
+        {% include 'layouts/modal_form.html' with action="membership_form"|url_value submit_button="Add Membership" body='membership_form.html' form_title="New Membership" %}
 
 
+{% endblock %}
+
+{% block js %}
+<script>
+$(document).ready(function (){
+    let description_display = $('#description_display')
+    let addDescription = $("#btnAddDescription")
+    var itemList = [];
+    $('#description').on('keyup',function () {
+        if ($(this).val() !== ''){
+            addDescription.removeClass('d-none')
+        }
+        else{
+            addDescription.addClass('d-none')
+        }
+    });
+
+    addDescription.click(function (){
+        let inputValue = $('#description').val();
+        let isChecked = $('#strikethrough').is(':checked');
+
+        if (inputValue.trim() !== '') {
+          let item = { text: inputValue, boolean: isChecked };
+          itemList.push(item);
+          $('#description').val('');
+          $('#strikethrough').prop('checked', false);
+          displayList();
+        }
+    });
+
+    function removeFromList(index){
+        $("#list_"+index).remove();
+        itemList.splice(index,1)
+        displayList()
+      }
+
+    function displayList() {
+        description_display.empty();
+
+        for (var i = 0; i < itemList.length; i++) {
+            let listItemText = itemList[i].boolean ? '<s>' + itemList[i].text + '</s>' : itemList[i].text;
+            let removeButton = `<i class="bi bi-x text-danger cancel-button ms-2" data-id="${i}"></i>`
+            let listItem = $(`<li class="m-2" id="list_${i}">`).html(listItemText+removeButton);
+          description_display.append(listItem);
+        }
+        description_display.addClass('p-2')
+      }
+
+      $('.cancel_button').on('click',function (){
+          console.log("Here")
+          let index = $(this).data('id')
+          removeFromList(index)
+      })
+
+})
+</script>
 {% endblock %}

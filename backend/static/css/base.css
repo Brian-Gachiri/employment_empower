@@ -945,3 +945,10 @@
 table.dataTable.table-striped>tbody>tr.odd>* {
     box-shadow: inset 0 0 0 9999px var(--light-background);
 }
+
+/*Form Stylings */
+.form-label, .form-check-label{
+  font-size: 1rem;
+  color: var(--main-dark);
+  margin-bottom: 0 !important;
+}
