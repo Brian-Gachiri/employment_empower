@@ -61,7 +61,8 @@
           </div>
 
           <div class="col-lg-6">
-            <form action="forms/contact.php" method="post" class="php-email-form">
+            <form class="php-email-form" id="contact-form">
+                {% csrf_token %}
               <div class="row gy-4">
 
                 <div class="col-md-6">
@@ -81,7 +82,7 @@
                 </div>
 
                 <div class="col-md-12 text-center">
-                  <button type="submit" class="btn btn-main">Send Message</button>
+                  <button type="submit" id="submitButton" class="btn btn-main">Send Message</button>
                 </div>
 
               </div>
@@ -109,5 +110,35 @@
 {% endblock %}
 
 {% block js %}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script>
+    $(document).ready(() => {
+        $('#contact-form').submit((e)=>{
+            e.preventDefault()
+            loaderBtn(true,'#submitButton')
+            $.ajax({
+                dataType: 'json',
+                url: '{% url "contact" %}',
+                data: $('#contact-form').serialize(),
+                method: 'POST',
+                success: function (data) {
+                     loaderBtn(false,'#submitButton')
+                    if (data.success){
+                        $('#contact-form').trigger("reset")
+                        swal("Submitted!", "Thank you for your feedback!", "success");
+                    }else{
+                        swal("Sorry!", data.message, "info");
+                    }
+
+                },
+                error: function (error) {
+                      loaderBtn(false,'#submitButton')
+                }
+
+        });
+        })
+    })
+    </script>
 
 {% endblock %}
