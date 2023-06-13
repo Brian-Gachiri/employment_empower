@@ -9,8 +9,6 @@ from backend.models import *
 
 def home(request):
     membership_list = Membership.objects.all()
-
-    print(membership_list.first().description)
     data = {
         'memberships': membership_list
     }
@@ -57,5 +55,9 @@ def team(request):
     return render(request, 'team.html', {})
 
 def memberships(request):
+    membership_list = Membership.objects.all()
+    data = {
+        'memberships': membership_list
+    }
 
-    return render(request, 'memberships.html', {})
+    return render(request, 'memberships.html', data)
