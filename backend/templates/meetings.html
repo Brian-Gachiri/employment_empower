@@ -36,16 +36,18 @@
                             </tr>
                           </thead>
                           <tbody>
+                          {% for meet in meetings %}
                             <tr>
                               <th>1</th>
-                              <td>James Doe</td>
-                              <td>Peter Doe</td>
-                              <td><small class="py-1 px-2 rounded bg-danger-light mx-1 text-danger-dark">Cancelled</small></td>
-                              <td>13th February</td>
+                              <td>{{ meet.client }}</td>
+                              <td>{{ meet.instructor|title }}</td>
+                              <td><small class="py-1 px-2 rounded {{ meet.status_color }} mx-1 ">{{ meet.status_text }}</small></td>
+                              <td>{{ meet.schedule_time }}</td>
                                 <td class="text-center">
                                     <a href="/" class="btn btn-main-light btn-sm"><i class="bi bi-box-arrow-up-right"></i></a>
                                 </td>
                             </tr>
+                          {% endfor %}
                           </tbody>
                         </table>
                     </div>
@@ -55,7 +57,41 @@
     </div>
     </section>
 
-    {% include 'layouts/modal_form.html' with action="meetings_form"|url_value submit_button="Schedule Session" body='meetings_form.html' form_title="New Private Session" %}
+    {% include 'layouts/modal_form.html' with action="meetings_create"|url_value submit_button="Schedule Session" body='meetings_form.html' form_title="New Private Session" %}
 
 
+{% endblock %}
+{% block js %}
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script>
+$(document).ready(function (){
+
+    $('#modal_form').submit(function(e){
+        e.preventDefault()
+        $.ajax({
+            dataType: 'json',
+            url: $(this).prop('action'),
+            data: $(this).serialize(),
+            method: 'POST',
+            success: function (data) {
+                 loaderBtn(false,'#submitButton')
+                if (data.success){
+                    $('#modalForm').trigger("reset")
+                    swal("Submitted!", "Private session scheduled!", "success").then((value) => {
+                        window.location.reload()
+                    });
+                }else{
+                    swal("Sorry!", data.message, "info");
+                }
+            },
+            error: function (error) {
+                  loaderBtn(false,'#submitButton')
+                  swal("Sorry!", "Something went wrong. Please try again later.", "error");
+            }
+         })
+
+    })
+
+})
+</script>
 {% endblock %}

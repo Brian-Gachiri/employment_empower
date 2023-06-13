@@ -36,17 +36,19 @@
                             </tr>
                           </thead>
                           <tbody>
+                          {% for ship in memberships %}
                             <tr>
-                              <th>1</th>
-                              <td>Platinum</td>
-                              <td>45</td>
-                              <td>$50</td>
-                              <td>1</td>
+                              <th>#</th>
+                              <td>{{ ship.name }}</td>
+                              <td>{{ ship.clients_count }}</td>
+                              <td>${{ ship.price }}</td>
+                              <td>{{ ship.tier }}</td>
                                 <td>
                                     <a href="/" class="btn btn-main-light btn-sm"><i class="bi bi-pencil-square"></i></a>
-                                    <a href="/" class="btn btn-danger btn-sm"><i class="bi bi-trash-fill"></i></a>
+                                    <a href="javascript:void(0)" data-route="{% url 'membership_delete' ship.id %}" class="btn btn-danger btn-sm delete_icon"><i class="bi bi-trash-fill"></i></a>
                                 </td>
                             </tr>
+                          {% endfor %}
                           </tbody>
                         </table>
                     </div>
@@ -56,12 +58,13 @@
     </div>
     </section>
 
-        {% include 'layouts/modal_form.html' with action="membership_form"|url_value submit_button="Add Membership" body='membership_form.html' form_title="New Membership" %}
+        {% include 'layouts/modal_form.html' with action="membership_create"|url_value submit_button="Add Membership" body='membership_form.html' form_title="New Membership" %}
 
 
 {% endblock %}
 
 {% block js %}
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script>
 $(document).ready(function (){
     let description_display = $('#description_display')
@@ -81,37 +84,67 @@ $(document).ready(function (){
         let isChecked = $('#strikethrough').is(':checked');
 
         if (inputValue.trim() !== '') {
-          let item = { text: inputValue, boolean: isChecked };
+          let item = { text: inputValue, locked: isChecked };
           itemList.push(item);
           $('#description').val('');
           $('#strikethrough').prop('checked', false);
           displayList();
         }
     });
-
     function removeFromList(index){
-        $("#list_"+index).remove();
         itemList.splice(index,1)
         displayList()
       }
 
     function displayList() {
         description_display.empty();
+        description_display.removeClass('p-2')
 
         for (var i = 0; i < itemList.length; i++) {
-            let listItemText = itemList[i].boolean ? '<s>' + itemList[i].text + '</s>' : itemList[i].text;
-            let removeButton = `<i class="bi bi-x text-danger cancel-button ms-2" data-id="${i}"></i>`
+            let listItemText = itemList[i].locked ? '<s>' + itemList[i].text + '</s>' : itemList[i].text;
+            let removeButton = `<a href="javascript:void(0)" class="btn btn-outline-danger border-0 cancel-button ms-2" data-id="${i}"><i class="bi bi-x text-danger"></i></a>`
             let listItem = $(`<li class="m-2" id="list_${i}">`).html(listItemText+removeButton);
           description_display.append(listItem);
         }
-        description_display.addClass('p-2')
-      }
-
-      $('.cancel_button').on('click',function (){
+        $('.cancel-button').click(function (){
           console.log("Here")
           let index = $(this).data('id')
           removeFromList(index)
       })
+        if(itemList.length > 0) description_display.addClass('p-2')
+      }
+
+    $('#modal_form').submit(function(e){
+        e.preventDefault()
+
+        if (itemList.length < 1) {
+            swal("Data Missing!", "Please at least 1 descriptive option for this membership", "info");
+        }else{
+            $.ajax({
+                 dataType: 'json',
+                    url: $(this).prop('action'),
+                    data: $(this).serialize()+"&description="+JSON.stringify(itemList),
+                    method: 'POST',
+                    success: function (data) {
+                         loaderBtn(false,'#submitButton')
+                        if (data.success){
+                            $('#modal_form').trigger("reset")
+                            itemList = []
+                            swal("Submitted!", "New membership added!", "success").then((value) => {
+                                window.location.reload()
+                            })
+                        }else{
+                            swal("Sorry!", data.message, "info");
+                        }
+
+                    },
+                    error: function (error) {
+                          loaderBtn(false,'#submitButton')
+                    }
+             })
+        }
+
+    })
 
 })
 </script>

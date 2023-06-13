@@ -4,12 +4,17 @@ from django.http import JsonResponse
 from django.shortcuts import render
 
 # Create your views here.
-from backend.models import Query
+from backend.models import *
 
 
 def home(request):
+    membership_list = Membership.objects.all()
 
-    return render(request, 'home.html', {})
+    print(membership_list.first().description)
+    data = {
+        'memberships': membership_list
+    }
+    return render(request, 'home.html', data)
 
 def contact(request):
 

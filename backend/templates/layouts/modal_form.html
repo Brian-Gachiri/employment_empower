@@ -6,12 +6,12 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-          <form id="modal_form" action="{{ action }}">
+          <form id="modal_form" action="{{ action }}" method="post">
               {% csrf_token %}
               {% include body %}
               <div class="d-flex flex-row justify-content-end mt-2">
                   <button type="button" class="btn btn-main-light mx-1" data-bs-dismiss="modal" aria-label="Close">Cancel</button>
-                  <button class="btn btn-main mx-1" type="submit">{{ submit_button }}</button>
+                  <button class="btn btn-main mx-1" id="submitButton" type="submit">{{ submit_button }}</button>
               </div>
           </form>
       </div>

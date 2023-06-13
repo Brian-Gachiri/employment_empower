@@ -1,5 +1,6 @@
 {% extends 'layouts/base.html' %}
 {% load static %}
+{% load custom_tags %}
 
 {% block content %}
 
@@ -18,7 +19,7 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-12 d-flex flex-column align-items-end mt-4 mb-3">
-                <a href="/" class="btn btn-main"><i class="bi bi-plus"></i> New Coupon</a>
+                <button class="btn btn-main" type="button" data-bs-toggle="modal" data-bs-target="#modalForm"><i class="bi bi-plus"></i> New Coupon</button>
             </div>
             <div class="col-lg-12">
                 <div class="card">
@@ -38,17 +39,19 @@
                             </tr>
                           </thead>
                           <tbody>
+                          {% for coupon in coupons %}
                             <tr>
-                              <th>1</th>
-                              <td>EMPLOYMENT2023</td>
-                              <td>5%</td>
-                              <td>23rd July</td>
-                              <td>4/10</td>
+                              <th>#</th>
+                              <td>{{ coupon.coupon_code }}</td>
+                              <td>{{ coupon.coupon_discount }}%</td>
+                              <td>{{ coupon.expiration_date }}</td>
+                              <td>4/{{ coupon.maximum_uses }}</td>
                                 <td>
                                     <a href="/" class="btn btn-main-light btn-sm"><i class="bi bi-pencil-square"></i></a>
                                     <a href="/" class="btn btn-danger btn-sm"><i class="bi bi-trash-fill"></i></a>
                                 </td>
                             </tr>
+                          {% endfor %}
                           </tbody>
                         </table>
                     </div>
@@ -58,6 +61,42 @@
     </div>
     </section>
 
+        {% include 'layouts/modal_form.html' with action="coupon_create"|url_value submit_button="Add Coupon" body='coupon_form.html' form_title="New Coupon" %}
 
 
+{% endblock %}
+
+{% block js %}
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script>
+$(document).ready(function (){
+
+    $('#modal_form').submit(function(e){
+        e.preventDefault()
+        $.ajax({
+            dataType: 'json',
+            url: $(this).prop('action'),
+            data: $(this).serialize(),
+            method: 'POST',
+            success: function (data) {
+                 loaderBtn(false,'#submitButton')
+                if (data.success){
+                    $('#modalForm').trigger("reset")
+                    swal("Submitted!", "New coupon added", "success").then((value) => {
+                        window.location.reload()
+                    });
+                }else{
+                    swal("Sorry!", data.message, "info");
+                }
+            },
+            error: function (error) {
+                  loaderBtn(false,'#submitButton')
+                  swal("Sorry!", "Something went wrong. Please try again later.", "error");
+            }
+         })
+
+    })
+
+})
+</script>
 {% endblock %}

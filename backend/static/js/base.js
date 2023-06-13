@@ -201,3 +201,37 @@
   }
 
 })();
+
+
+function deleteItem(route){
+  let csrftoken =
+        $.ajax({
+            dataType: 'json',
+            url: route,
+            mode: 'same-origin',
+            method: 'DELETE',
+            success: function (data) {
+                if (data.success){
+                    swal("Complete!", "Delete successful!", "success").then((value) => {
+                        window.location.reload()
+                    });
+                }else{
+                    swal("Sorry!", data.message, "info");
+                }
+            },
+            error: function (error) {
+                  swal("Sorry!", "Something went wrong. Please try again later.", "error");
+            }
+         })
+}
+
+$(document).ready(function(){
+      $(".delete_icon").click(function(){
+        let delete_route = $(this).data('route')
+        swal("Confirm Delete", "Are you sure you want to delete this record?", "warning").then((value) => {
+            if (value){
+                deleteItem(delete_route)
+            }
+        })
+    })
+})

@@ -1,10 +1,10 @@
 from django.db import models
 from django.contrib.auth.models import User
 
+
 # Create your models here.
 
 class Client(User):
-
     phone_number = models.IntegerField()
     address = models.CharField(max_length=50, null=True, blank=True)
     profile_image = models.ImageField(upload_to="images/", default='user.png')
@@ -13,8 +13,11 @@ class Client(User):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
-class Membership(models.Model):
+    def __str__(self):
+        return self.username
 
+
+class Membership(models.Model):
     name = models.CharField(max_length=250)
     description = models.JSONField(null=False, blank=False)
     price = models.FloatField()
@@ -22,8 +25,8 @@ class Membership(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
-class ClientMembership(models.Model):
 
+class ClientMembership(models.Model):
     membership = models.ForeignKey(Membership, on_delete=models.CASCADE)
     client = models.ForeignKey(Client, on_delete=models.CASCADE)
     start_date = models.DateField()
@@ -41,6 +44,7 @@ class Query(models.Model):
     read = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
 
 class Content(models.Model):
     BLOG = 1
@@ -62,6 +66,7 @@ class Content(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
+
 class Comment(models.Model):
     text = models.TextField(null=True, blank=True)
     rating = models.FloatField(null=True, blank=True)
@@ -70,12 +75,14 @@ class Comment(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
+
 class ContentActivity(models.Model):
     content = models.ForeignKey(Content, on_delete=models.CASCADE)
     client = models.ForeignKey(Client, on_delete=models.CASCADE)
     times_viewed = models.IntegerField(default=0)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
 
 class PrivateSession(models.Model):
     ACTIVE = 1
@@ -86,8 +93,8 @@ class PrivateSession(models.Model):
     SESSION_STATUS = (
         (ACTIVE, "Active"),
         (RESCHEDULED, "Rescheduled"),
-        (PENDING, "Pending"),
         (CANCELLED, "Cancelled"),
+        (PENDING, "Pending"),
     )
 
     meeting_url = models.URLField()
@@ -97,6 +104,21 @@ class PrivateSession(models.Model):
     schedule_time = models.DateTimeField(null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return self.meeting_url
+
+    @property
+    def status_color(self):
+        if self.status == self.CANCELLED:
+            return 'bg-danger-light text-danger-dark'
+        if self.status == self.ACTIVE:
+            return 'bg-main-light text-main'
+        return 'bg-accent-light text-accent-dark'
+
+    @property
+    def status_text(self):
+        return self.SESSION_STATUS[self.status-1][1]
 
     # class PaymentMethod(models.Model):
     #
@@ -108,13 +130,14 @@ class PrivateSession(models.Model):
     #     created_at = models.DateTimeField(auto_now_add=True)
     #     updated_at = models.DateTimeField(auto_now=True)
 
-    class Coupon(models.Model):
-        coupon_code = models.CharField(max_length=50)
-        coupon_discount = models.FloatField()  # Percentage
-        expiration_date = models.DateField(null=True, blank=True)
-        maximum_uses = models.IntegerField(null=True, blank=True)
-        created_at = models.DateTimeField(auto_now_add=True)
-        updated_at = models.DateTimeField(auto_now=True)
+
+class Coupon(models.Model):
+    coupon_code = models.CharField(max_length=50)
+    coupon_discount = models.FloatField()  # Percentage
+    expiration_date = models.DateField(null=True, blank=True)
+    maximum_uses = models.IntegerField(null=True, blank=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
     # class Order(models.Model):
     #     client = models.ForeignKey(ClientMembership, on_delete=models.SET_NULL, null=True, blank=True)

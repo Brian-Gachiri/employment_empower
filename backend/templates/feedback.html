@@ -27,14 +27,14 @@
                 {% for query in queries %}
               <div class="accordion-item">
                 <h2 class="accordion-header">
-                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq-content-1">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq-content-{{ query.id }}">
                     <div class="profile">{{ query.name |make_list|first }}</div>
                       <div class="d-flex flex-column ms-2 font-normal">
                           {{ query.name }} - {{ query.email }} <small class="mt-1">{{ query.created_at }}</small>
                       </div>
                   </button>
                 </h2>
-                <div id="faq-content-1" class="accordion-collapse collapse" data-bs-parent="#faqlist1">
+                <div id="faq-content-{{ query.id }}" class="accordion-collapse collapse" data-bs-parent="#faqlist1">
                   <div class="accordion-body fs-6">
                     {{ query.subject }} <br>
                       {{ query.text }}

@@ -945,6 +945,9 @@
 table.dataTable.table-striped>tbody>tr.odd>* {
     box-shadow: inset 0 0 0 9999px var(--light-background);
 }
+.table-striped>tbody>tr:nth-of-type(odd)>* {
+      box-shadow: inset 0 0 0 9999px var(--light-background) !important;
+}
 
 /*Form Stylings */
 .form-label, .form-check-label{
