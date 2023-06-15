@@ -24,8 +24,15 @@ urlpatterns = [
     path('memberships/create', membership_create, name='membership_create'),
     path('memberships/<id>/delete', membership_delete, name='membership_delete'),
     path('job-seekers', job_seekers, name='job_seekers'),
-    path('job-seekers/details', job_seeker_detail, name='seeker_details'),
+    path('job-seekers/<id>/details', job_seeker_detail, name='seeker_details'),
+
     path('content', content, name='content'),
+    path('content/<id>/details', content_details, name='content_details'),
+    path('content/blog/create', create_blog, name="create_blog"),
+    path('content/blog/delete', delete_blog, name="delete_blog"),
+    path('content/blog/update/<id>', update_blog, name="update_blog"),
+    # path('upload/article/image', upload_file, name="upload_file"),
+
     path('private-sessions', meetings, name='meetings'),
     path('private-sessions/form', meeting_create, name='meetings_create'),
     path('feedback-and-queries', feedback, name='feedback'),

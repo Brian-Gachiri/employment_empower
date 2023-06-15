@@ -1,6 +1,7 @@
+from django.contrib import messages
 from django.core.paginator import Paginator
 from django.db.models import Q, Count
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponseRedirect
 from django.shortcuts import render
 
 # Create your views here.
@@ -56,13 +57,28 @@ def membership_delete(request, id):
     return JsonResponse(data)
 
 def job_seekers(request):
-    return render(request, 'job_seekers.html', {})
+    clients = Client.objects.all().order_by('-id')
 
-def job_seeker_detail(request):
-    return render(request, 'seeker_details.html', {})
+    return render(request, 'job_seekers.html', {'clients': clients})
+
+def job_seeker_detail(request, id):
+    client = Client.objects.filter(id=id).first()
+    sessions = PrivateSession.objects.filter(client=client).order_by('-id')
+
+    data = {
+        'client': client,
+        'sessions': sessions
+    }
+    return render(request, 'seeker_details.html', data)
 
 def content(request):
-    return render(request, 'content.html', {})
+    contents = Content.objects.all()
+
+    return render(request, 'content.html', {'contents':contents})
+
+def content_details(request, id):
+    content = Content.objects.filter(id=id)
+    return render(request, 'content_details.html', {'content':content})
 
 def meetings(request):
     sessions = PrivateSession.objects.all()
@@ -122,3 +138,79 @@ def coupons(request):
 
 def orders(request):
     return render(request, 'orders.html', {})
+
+def create_blog(request):
+
+    if request.method == "GET":
+        data = Membership.objects.all()
+        return render(request, "blog_create.html", {'memberships': data})
+
+    else:
+        name = request.POST.get("title")
+        description = request.POST.get("post")
+        image = request.FILES.get("image", None)
+        tiers = request.POST.getlist('tier[]')
+        tier_string = ','.join(tiers)
+
+        Content.objects.create(
+            name=name,
+            description=description,
+            file=image,
+            type=Content.BLOG,
+            url="https://stuff.com",
+            tier_access=tier_string
+        )
+
+        return HttpResponseRedirect("/staff/content")
+
+def update_blog(request, id):
+
+    try:
+        content = Content.objects.get(pk=id)
+    except Content.DoesNotExist:
+        return redirectBack(request)
+
+    if request.method == "GET":
+        data = Membership.objects.all()
+        can_edit = False
+        if request.user is content.instructor or request.user.is_superuser:
+            can_edit = True
+        data = {
+            "article": content,
+            "can_edit": can_edit,
+            'memberships': data
+        }
+        return render(request, "blog_create.html", data)
+
+    else:
+        print(request.POST)
+        name = request.POST.get("title")
+        description = request.POST.get("post")
+        image = request.FILES.get("image", None)
+        tiers = request.POST.getlist('tier[]')
+        tier_string = ','.join(tiers)
+
+        content.name = name
+        content.description =description
+        if image:
+            content.file = image
+        content.tier_access = tier_string
+        content.save()
+
+
+        message = "Blog published successfully."
+
+        messages.info(request, message)
+        return HttpResponseRedirect("/staff/content")
+
+
+def delete_blog(request):
+    content = Content.objects.filter(pk=request.POST.get("article")).first()
+    if content:
+        content.comment_set.all().delete()
+        content.delete()
+
+    return HttpResponseRedirect("/staff/content")
+
+def redirectBack(request):
+    return HttpResponseRedirect(request.META.get("HTTP_REFERER"))

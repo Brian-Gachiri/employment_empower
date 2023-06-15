@@ -106,7 +106,7 @@ a:hover {
 }
 
 .bg-main-light{
-    background-color: var(--background);
+    background-color: var(--background) !important;
 }
 .bg-accent{
     background-color: var(--accent);
@@ -122,6 +122,15 @@ a:hover {
 }
 .bg-danger-light{
     background-color: var(--red-light) !important;
+}
+.form-control:focus {
+    border-color: #37a6dc !important;
+    box-shadow: inset 0 1px 1px #37a6dc, 0 0 8px #37a6dc60 !important;
+}
+
+.form-check-input:checked {
+    background-color: var(--main) !important;
+    border-color: var(--main) !important;
 }
 /*--------------------------------------------------------------
 # F.A.Q

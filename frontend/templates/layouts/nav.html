@@ -22,10 +22,15 @@
           <li class="nav-item">
           <a class="nav-link {% if request.path == '/contact' %}active {% endif %}" href="{% url 'contact' %}">Contact</a>
         </li>
+      {% if request.user.is_authenticated %}
+          <li class="nav-item">
+          <a class="btn btn-main" {% if request.user.is_admin %}href="{% url 'dashboard' %}" {% else %} href="{% url 'dashboard' %}" {% endif %}>Dashboard</a>
+        </li>
+      {% else %}
           <li class="nav-item">
           <a class="btn btn-main" href="#memberships">Get Started</a>
         </li>
-
+      {% endif %}
       </ul>
     </div>
   </div>

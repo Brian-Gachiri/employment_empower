@@ -8,6 +8,7 @@ class Client(User):
     phone_number = models.IntegerField()
     address = models.CharField(max_length=50, null=True, blank=True)
     profile_image = models.ImageField(upload_to="images/", default='user.png')
+    interests = models.TextField(null=True, blank=True)
     date_of_birth = models.DateField(null=True, blank=True)
     is_online = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
@@ -25,15 +26,21 @@ class Membership(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
+    def __str__(self):
+        return self.name
+
 
 class ClientMembership(models.Model):
     membership = models.ForeignKey(Membership, on_delete=models.CASCADE)
-    client = models.ForeignKey(Client, on_delete=models.CASCADE)
+    client = models.OneToOneField(Client, on_delete=models.CASCADE)
     start_date = models.DateField()
     end_date = models.DateField(null=True, blank=True)
     auto_renewal = models.BooleanField(default=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return "%s (%s)" % (self.client.username, self.membership.name)
 
 
 class Query(models.Model):
@@ -61,10 +68,19 @@ class Content(models.Model):
     instructor = models.ForeignKey(User, related_name="Admin", on_delete=models.SET_NULL, null=True, blank=True)
     rating = models.CharField(max_length=50, default="0")
     type = models.IntegerField(choices=CONTENT_TYPES)
-    tier_access = models.JSONField()
-    url = models.URLField()
+    tier_access = models.CharField(max_length=100)
+    url = models.URLField(null=True, blank=True)
+    file = models.FileField(upload_to="content", null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
+    @property
+    def type_name(self):
+        return self.CONTENT_TYPES[self.type - 1][1]
+
+    @property
+    def tier_access_list(self):
+        return self.tier_access.split(',')
 
 
 class Comment(models.Model):
@@ -78,10 +94,19 @@ class Comment(models.Model):
 
 class ContentActivity(models.Model):
     content = models.ForeignKey(Content, on_delete=models.CASCADE)
-    client = models.ForeignKey(Client, on_delete=models.CASCADE)
+    client = models.ForeignKey(Client, on_delete=models.CASCADE, related_name="activites")
     times_viewed = models.IntegerField(default=0)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
+    @property
+    def activity_text(self):
+        if self.content.type_name == "Blog":
+            return f'Viewed the article "{self.content.name}"'
+        if self.content.type_name == "Webinar":
+            return f'Attended the webinar {self.content.name}'
+        if self.content.type_name == "Video":
+            return f'Watched the tutorial "{self.content.name}"'
 
 
 class PrivateSession(models.Model):

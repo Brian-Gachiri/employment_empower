@@ -1,5 +1,6 @@
 {% extends 'layouts/base.html' %}
 {% load static %}
+{% load custom_tags %}
 
 {% block content %}
 
@@ -16,9 +17,19 @@
 
     <section>
     <div class="container">
+
         <div class="row">
             <div class="col-lg-12 d-flex flex-column align-items-end mt-4 mb-3">
-                <a href="/" class="btn btn-main"><i class="bi bi-plus"></i> New Content</a>
+                <div class="dropdown">
+                  <button class="btn btn-main dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    New Content
+                  </button>
+                  <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="{% url 'create_blog' %}"><i class="bi bi-plus"></i> Blog</a></li>
+                    <li><a class="dropdown-item" href="#"><i class="bi bi-plus"></i> Video</a></li>
+                    <li><a class="dropdown-item" href="#"><i class="bi bi-plus"></i> Webinar</a></li>
+                  </ul>
+                </div>
             </div>
             <div class="col-lg-12">
                 <div class="card">
@@ -36,17 +47,28 @@
                             </tr>
                           </thead>
                           <tbody>
+                          {% for content in contents %}
                             <tr>
-                              <th>1</th>
-                              <td>How to create a CV</td>
-                              <td>Article</td>
-                              <td><small class="py-1 px-2 rounded bg-accent-light mx-1 text-accent-dark">Platinum</small><small class="py-1 px-2 rounded bg-accent-light mx-1 text-accent-dark">Silver</small></td>
-                              <td>5 Star</td>
-                              <td>13th February</td>
+                              <th>#</th>
+                              <td>{{ content.name }}</td>
+                              <td>{{ content.type_name }}</td>
+                              <td>
+                                  {% for tier in content.tier_access|memberships %}
+                                        <small class="py-1 px-2 rounded bg-accent-light mx-1 text-accent-dark">{{ tier.name }}</small>
+                                  {% endfor %}
+                              </td>
+                              <td>{{ content.rating }} Star</td>
+                              <td>{{ content.created_at }}</td>
                                 <td class="text-center">
-                                    <a href="/" class="btn btn-main-light btn-sm"><i class="bi bi-box-arrow-up-right"></i></a>
+                                    {% if content.type == content.BLOG %}
+                                          <a href="{% url 'update_blog' content.id %}" class="btn btn-main-light btn-sm"><i class="bi bi-pencil-square"></i></a>
+                                    {% else %}
+                                          <a href="#" class="btn btn-main-light btn-sm"><i class="bi bi-pencil-square"></i></a>
+                                    {% endif %}
+                                      <a href="{% url 'content_details' content.id %}" class="btn btn-main btn-sm"><i class="bi bi-box-arrow-up-right"></i></a>
                                 </td>
                             </tr>
+                          {% endfor %}
                           </tbody>
                         </table>
                     </div>

@@ -18,7 +18,7 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-12 d-flex flex-column align-items-end mt-4 mb-3">
-                <a href="/" class="btn btn-main"><i class="bi bi-plus"></i> New Job Seeker</a>
+{#                <a href="/" class="btn btn-main"><i class="bi bi-plus"></i> New Job Seeker</a>#}
             </div>
             <div class="col-lg-12">
                 <div class="card">
@@ -35,16 +35,18 @@
                             </tr>
                           </thead>
                           <tbody>
+                          {% for client in clients %}
                             <tr>
-                              <th>1</th>
-                              <td>James Doe</td>
-                              <td>jamesdoe@gmail.com</td>
-                              <td><small class="py-1 px-2 rounded bg-accent-light mx-1 text-accent-dark">Platinum</small></td>
-                              <td>13th February</td>
+                              <th>#</th>
+                              <td>{{ client.username }}</td>
+                              <td>{{ client.email }}</td>
+                              <td><small class="py-1 px-2 rounded bg-accent-light mx-1 text-accent-dark">{{ client.clientmembership.membership }}</small></td>
+                              <td>{{ client.created_at }}</td>
                                 <td class="text-center">
-                                    <a href="/" class="btn btn-main-light btn-sm"><i class="bi bi-box-arrow-up-right"></i></a>
+                                    <a href="{% url 'seeker_details' client.id %}" target="_blank" class="btn btn-main-light btn-sm"><i class="bi bi-box-arrow-up-right"></i></a>
                                 </td>
                             </tr>
+                          {% endfor %}
                           </tbody>
                         </table>
                     </div>
