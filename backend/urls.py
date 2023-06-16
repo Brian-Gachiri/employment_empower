@@ -23,6 +23,7 @@ urlpatterns = [
     path('memberships', memberships, name='membership_list'),
     path('memberships/create', membership_create, name='membership_create'),
     path('memberships/<id>/delete', membership_delete, name='membership_delete'),
+    path('memberships/<id>/restore', membership_restore, name='membership_restore'),
     path('job-seekers', job_seekers, name='job_seekers'),
     path('job-seekers/<id>/details', job_seeker_detail, name='seeker_details'),
 

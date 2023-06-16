@@ -8,7 +8,7 @@ from backend.models import *
 
 
 def home(request):
-    membership_list = Membership.objects.all()
+    membership_list = Membership.objects.filter(deleted_at__isnull=True)
     data = {
         'memberships': membership_list
     }
@@ -55,7 +55,7 @@ def team(request):
     return render(request, 'team.html', {})
 
 def memberships(request):
-    membership_list = Membership.objects.all()
+    membership_list = Membership.objects.filter(deleted_at__isnull=True)
     data = {
         'memberships': membership_list
     }

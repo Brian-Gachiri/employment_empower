@@ -37,15 +37,19 @@
                           </thead>
                           <tbody>
                           {% for ship in memberships %}
-                            <tr>
+                            <tr {% if ship.deleted_at %} class="deleted"{% endif %}>
                               <th>#</th>
-                              <td>{{ ship.name }}</td>
+                                <td>{{ ship.name }} {% if ship.deleted_at %} <span class="p-1 bg-danger text-white rounded fs-6">Deleted</span>{% endif %}</td>
                               <td>{{ ship.clients_count }}</td>
                               <td>${{ ship.price }}</td>
                               <td>{{ ship.tier }}</td>
                                 <td>
+                                    {% if not ship.deleted_at %}
                                     <a href="/" class="btn btn-main-light btn-sm"><i class="bi bi-pencil-square"></i></a>
                                     <a href="javascript:void(0)" data-route="{% url 'membership_delete' ship.id %}" class="btn btn-danger btn-sm delete_icon"><i class="bi bi-trash-fill"></i></a>
+                                    {% else %}
+                                       <a href="javascript:void(0)" data-item="membership" data-route="{% url 'membership_restore' ship.id %}" class="btn btn-main btn-sm restore_icon"><i class="bi bi-arrow-counterclockwise"></i></a>
+                                    {% endif %}
                                 </td>
                             </tr>
                           {% endfor %}

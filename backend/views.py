@@ -1,3 +1,5 @@
+import datetime
+
 from django.contrib import messages
 from django.core.paginator import Paginator
 from django.db.models import Q, Count
@@ -49,7 +51,19 @@ def membership_create(request):
 def membership_delete(request, id):
     membership = Membership.objects.filter(id=id).first()
     if membership:
-        membership.delete()
+        membership.deleted_at = datetime.datetime.now()
+        membership.save()
+
+    data = {
+        'success': True
+    }
+    return JsonResponse(data)
+
+def membership_restore(request, id):
+    membership = Membership.objects.filter(id=id).first()
+    if membership:
+        membership.deleted_at = None
+        membership.save()
 
     data = {
         'success': True
@@ -77,8 +91,8 @@ def content(request):
     return render(request, 'content.html', {'contents':contents})
 
 def content_details(request, id):
-    content = Content.objects.filter(id=id)
-    return render(request, 'content_details.html', {'content':content})
+    item = Content.objects.filter(id=id)
+    return render(request, 'content_details.html', {'content': item})
 
 def meetings(request):
     sessions = PrivateSession.objects.all()

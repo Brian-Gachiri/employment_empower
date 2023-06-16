@@ -204,7 +204,6 @@
 
 
 function deleteItem(route){
-  let csrftoken =
         $.ajax({
             dataType: 'json',
             url: route,
@@ -224,6 +223,26 @@ function deleteItem(route){
             }
          })
 }
+function restoreItem(route){
+        $.ajax({
+            dataType: 'json',
+            url: route,
+            mode: 'same-origin',
+            method: 'GET',
+            success: function (data) {
+                if (data.success){
+                    swal("Complete!", "Restoration successful!", "success").then((value) => {
+                        window.location.reload()
+                    });
+                }else{
+                    swal("Sorry!", data.message, "info");
+                }
+            },
+            error: function (error) {
+                  swal("Sorry!", "Something went wrong. Please try again later.", "error");
+            }
+         })
+}
 
 $(document).ready(function(){
       $(".delete_icon").click(function(){
@@ -231,6 +250,16 @@ $(document).ready(function(){
         swal("Confirm Delete", "Are you sure you want to delete this record?", "warning").then((value) => {
             if (value){
                 deleteItem(delete_route)
+            }
+        })
+    })
+
+  $(".restore_icon").click(function(){
+        let route = $(this).data('route')
+        let item = $(this).data('item')
+        swal(`Restore ${item}`, `This ${item} will be accessible to users across the system once restored.`, "info").then((value) => {
+            if (value){
+                restoreItem(route)
             }
         })
     })
